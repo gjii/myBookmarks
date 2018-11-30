@@ -6,8 +6,31 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <header></header>
+    <header>
+        <nav class="topBar">
+            <div>                
+            </div>
+        </nav>
+    </header>
     <main>
+        <style>
+            .key{
+                width: 42px;
+                height: 48px;
+                border-radius: 6px;
+                font-family: Calibri;
+                font-size: 20PX;
+                font-weight: bold;
+                margin-top: 2px;   
+                position: relative;         
+                }  
+            .keyBorder{
+                width: 64px;
+                height: 66px;
+                border-radius: 6px;
+                margin: 3px;
+                }
+        </style>
         <div class="wrapper" id="main1"></div>
     </main>
     <footer>
@@ -27,6 +50,8 @@
             't': 'tianya.com',
             'y': 'yy.com',
             'h': 'hupu.com',
+            'b': 'baidu.com',
+            'g': 'github.com',
         }
         //取出 localStorage 中的 zzz 对应的 hash
         var hashInLocalStorge = JSON.parse(localStorage.getItem('zzz') || 'null')
@@ -42,19 +67,28 @@
             index2 = 0
             while(index2< row['length']){
                 kbd1 = document.createElement('kbd')
-                kbd1.textContent = row[index2]
-                div1.appendChild(kbd1)
+                kbd1.className = 'key'
+                kbd2 = document.createElement('kbd')
+                kbd2.className = 'keyBorder'
+                kbd1.textContent = row[index2]               
                 button1 = document.createElement('button')
-                kbd1.appendChild(button1)
                 button1.textContent = '编辑'
                 button1.id = row[index2]
+                img1 = document.createElement('img')
+                img1.src ='http://'+hash[row[index2]]+'/favicon.ico'
                 button1.onclick = function(xzkjcnxlkcjlk){//button1存放最后的赋值
-                    key = xzkjcnxlkcjlk['target']['id']
+                    button2 = xzkjcnxlkcjlk['target']
+                    img2 = button2.previousSibling
+                    key =button2['id']
                     x = prompt('给我一个网址')
                     hash[key] = x //hash变更
                     localStorage.setItem('zzz',JSON.stringify(hash))
                     console.log(hash)
                 }
+                kbd2.appendChild(kbd1)
+                div1.appendChild(kbd2)
+                kbd1.appendChild(button1)
+                kbd1.appendChild(img1)
                 index2 =index2 +1
             }
             index = index +1
@@ -63,7 +97,7 @@
             key = xzkjcnxlkcjlk['key']
             website = hash[key]
             // location.href = 'http://'+website //打开键对应的网站
-            window.open('http://'+website, '_blank') 
+            window.open('http://'+ website, '_blank') 
         }
     </script>
 </body>

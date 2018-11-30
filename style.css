@@ -5,9 +5,6 @@ a{
     text-decoration: none;
 }
 kbd{
-    border: 1px solid red;
-    width: 4em;
-    height: 4em;
     display: inline-block;
     text-transform: uppercase;
     position: relative;
@@ -21,15 +18,58 @@ kbd > button{
 kbd:hover > button{
     display: inline-block;
 }
-#main1 >div:nth-child(2){
-    margin-left: 1em;
+#main1 >div:nth-child(2) {
+    margin-left: -20px;
 }
-#main1 >div:nth-child(3){
-    margin-left: 2em;
+#main1 >div:nth-child(3) {
+    margin-left: -80px;
+}
+#main1 >div:nth-child(1) .key{
+    color: white;            
+    background: linear-gradient(to right, rgba(151,172,182,1) 0%, rgba(141,162,172,1) 100%);
+    border: 1px solid #ABBBC4;
+}
+#main1 >div:nth-child(2) .key{
+    color: white;
+    background: linear-gradient(to right, rgba(186,201,209,1) 0%, rgba(177,192,199,1) 100%);
+    border: 1px solid #c0cbd2;
+}
+#main1 >div:nth-child(3) .key{
+    color: #a8b9c4;
+    background: linear-gradient(to right, rgba(245,247,248,1) 0%, rgba(236,238,239,1) 100%);
+    border: 1px solid #eff0f1;
+}
+#main1 >div:nth-child(1) .keyBorder{
+    margin-top: 10px;
+    background:#708088;
+}
+#main1 >div:nth-child(2) .keyBorder{
+    background: #94a0a7;
+}
+#main1 >div:nth-child(3) .keyBorder{
+    margin-bottom: 10px;
+    background: #c4c6c7;
 }
 #main1{
-    display: inline-block;
+    background: rgba(255,255, 255, 0.1);
+    border-radius: 10px;
 }
 main{
     text-align: center;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+}
+body{
+    background: grey url(./wall.jpg) no-repeat center center;
+    background-size: cover;
+}
+.key img{
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    bottom: 0px;
+    left: 0px;
 }
