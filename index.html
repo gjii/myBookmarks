@@ -13,29 +13,12 @@
         </nav>
     </header>
     <main>
-        <style>
-            .key{
-                width: 42px;
-                height: 48px;
-                border-radius: 6px;
-                font-family: Calibri;
-                font-size: 20PX;
-                font-weight: bold;
-                margin-top: 2px;   
-                position: relative;         
-                }  
-            .keyBorder{
-                width: 64px;
-                height: 66px;
-                border-radius: 6px;
-                margin: 3px;
-                }
-        </style>
         <div class="wrapper" id="main1"></div>
     </main>
     <footer>
     </footer>
     <script>
+        //1.初始化数据
         var keys = {
             0: ['q','w','e','r','t','y','u','i','o','p'],
             1: ['a','s','d','f','g','h','j','k','l'],
@@ -52,52 +35,92 @@
             'h': 'hupu.com',
             'b': 'baidu.com',
             'g': 'github.com',
+            'a': 'acfun.cn',
         }
         //取出 localStorage 中的 zzz 对应的 hash
-        var hashInLocalStorge = JSON.parse(localStorage.getItem('zzz') || 'null')
+        var hashInLocalStorge = getFromLocalStorage('zzz')
         if(hashInLocalStorge){
             hash = hashInLocalStorge
         }
+        
+
+        //2.生成键盘
         //遍历 keys，生成 kbd 标签
-        index = 0
-        while(index< keys['length']){// 0 1 2
-            div1 = document.createElement('div')
+        for(var index=0; index<keys['length']; index = index+1){
+            var div1 = tag('div')
+
             main1.appendChild(div1)
-            row = keys[index] //第一个数组 第二个数组 第三个数组
-            index2 = 0
-            while(index2< row['length']){
-                kbd1 = document.createElement('kbd')
+
+            var row = keys[index] //第一个数组 第二个数组 第三个数组
+            for(var index2 = 0; index2< row['length'];index2 =index2+1){
+                var img1 = createImage(hash[row[index2]])
+                var button1 = createButton(row[index2])
+
+                var kbd1 = tag('kbd')
                 kbd1.className = 'key'
-                kbd2 = document.createElement('kbd')
+                kbd1.textContent = row[index2] 
+
+                var kbd2 = tag('kbd')
                 kbd2.className = 'keyBorder'
-                kbd1.textContent = row[index2]               
-                button1 = document.createElement('button')
-                button1.textContent = '编辑'
-                button1.id = row[index2]
-                img1 = document.createElement('img')
-                img1.src ='http://'+hash[row[index2]]+'/favicon.ico'
-                button1.onclick = function(xzkjcnxlkcjlk){//button1存放最后的赋值
-                    button2 = xzkjcnxlkcjlk['target']
-                    img2 = button2.previousSibling
-                    key =button2['id']
-                    x = prompt('给我一个网址')
-                    hash[key] = x //hash变更
-                    localStorage.setItem('zzz',JSON.stringify(hash))
-                    console.log(hash)
-                }
-                kbd2.appendChild(kbd1)
-                div1.appendChild(kbd2)
-                kbd1.appendChild(button1)
+         
                 kbd1.appendChild(img1)
-                index2 =index2 +1
+                kbd1.appendChild(button1)
+
+                kbd2.appendChild(kbd1)
+
+                div1.appendChild(kbd2)   
             }
-            index = index +1
         }
+
+
+        //3.监听键盘
         document.onkeypress = function(xzkjcnxlkcjlk){
             key = xzkjcnxlkcjlk['key']
             website = hash[key]
             // location.href = 'http://'+website //打开键对应的网站
             window.open('http://'+ website, '_blank') 
+        }
+
+        
+        //下面是函数工具
+        function getFromLocalStorage(name){
+            JSON.parse(localStorage.getItem(name) || 'null')
+        }
+
+        function tag(tagName){
+            return document.createElement(tagName)
+        }
+
+        function createImage(domain){
+            var img1 = tag('img')
+            if(domain){
+                img1.src ='http://'+ domain +'/favicon.ico'
+            }else{
+                img1.src = '//i.loli.net/2017/11/10/5a05afbc5e183.png'
+            }
+            img1.onerror = function(xxx){
+                xxx.target.src = '//i.loli.net/2017/11/10/5a05afbc5e183.png'
+            }
+            return img1    
+        }
+
+        function createButton(id){
+            var button1 = tag('button')
+            button1.textContent = '编辑'
+            button1.id = id
+            button1.onclick = function(xzkjcnxlkcjlk){//button1存放最后的赋值
+                var button2 = xzkjcnxlkcjlk['target']
+                img2 = button2.previousSibling
+                var key =button2['id']
+                x = prompt('给我一个网址')
+                hash[key] = x //hash变更
+                img2.src = 'http://' + x + '/favicon.ico'
+                img2.onerror = function(xxx){
+                    xxx.target.src = '//i.loli.net/2017/11/10/5a05afbc5e183.png'
+                }
+                localStorage.setItem('zzz',JSON.stringify(hash))
+            }
+            return button1
         }
     </script>
 </body>

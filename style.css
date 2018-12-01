@@ -60,7 +60,6 @@ main{
     justify-content: center;
     align-items: center;
     height: 100vh;
-    
 }
 body{
     background: grey url(./wall.jpg) no-repeat center center;
@@ -70,6 +69,22 @@ body{
     position: absolute;
     width: 16px;
     height: 16px;
-    bottom: 0px;
-    left: 0px;
+    bottom: 4px;
+    left: 14px;
+}
+.key{
+    width: 42px;
+    height: 48px;
+    border-radius: 6px;
+    font-family: Calibri;
+    font-size: 20PX;
+    font-weight: bold;
+    margin-top: 2px;   
+    position: relative;         
+}
+.keyBorder{
+    width: 64px;
+    height: 66px;
+    border-radius: 6px;
+    margin: 3px;
 }
